@@ -69,7 +69,7 @@ class CrocoDocumentDownload(View):
             return HttpResponse(content=e.response_content,
                 status=e.status_code)
 
-        response = HttpResponse(mimetype='application/pdf')
+        response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=%s.pdf' % uuid
         response.write(file)
         return response
@@ -91,7 +91,7 @@ class CrocoThumbnailDownload(View):
             return HttpResponse(content=e.response_content,
                 status=e.status_code)
 
-        response = HttpResponse(mimetype='image/png')
+        response = HttpResponse(content_type='image/png')
         response['Content-Disposition'] = 'attachment; filename=%s.png' % uuid
         response.write(image)
         return response
