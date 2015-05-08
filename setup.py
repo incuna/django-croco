@@ -11,7 +11,6 @@ setup(
     description='',
     long_description=open('README.rst').read(),
     author=djcroco.__author__,
-    author_email='matt.lenc@gmail.com',
     url='https://github.com/incuna/django-croco/',
     install_requires=[
         'crocodoc',
