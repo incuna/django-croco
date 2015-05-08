@@ -4,15 +4,14 @@ import djcroco
 
 
 setup(
-    name='djcroco',
+    name='django-croco',
     packages=find_packages(),
     include_package_data=True,
     version=djcroco.__version__,
     description='',
     long_description=open('README.rst').read(),
     author=djcroco.__author__,
-    author_email='matt.lenc@gmail.com',
-    url='https://github.com/mattack108/djcroco/',
+    url='https://github.com/incuna/django-croco/',
     install_requires=[
         'crocodoc',
     ],
