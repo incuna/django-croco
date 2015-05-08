@@ -1,6 +1,11 @@
 Changelog for djcroco
 =====================
 
+0.4.0
+=====
+
+* Add compatibility with django 1.8
+
 0.3.2
 =====
 
