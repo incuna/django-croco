@@ -1,6 +1,11 @@
 Changelog for djcroco
 =====================
 
+0.4.1
+=====
+
+* Fixes thumbnail file extension.
+
 0.4.0
 =====
 

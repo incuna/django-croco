@@ -220,7 +220,7 @@ class CrocoField(models.Field):
 
         thumbnail_field = self.model._meta.get_field(self.thumbnail_field)
 
-        filename = thumbnail_field.upload_to + uuid
+        filename = thumbnail_field.upload_to + uuid + '.png'
         thumbnail_field.storage.save(filename, File(img_temp))
 
         return thumbnail_field.storage.url(filename)
