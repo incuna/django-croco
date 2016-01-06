@@ -1,6 +1,13 @@
 Changelog for djcroco
 =====================
 
+1.0.0
+=====
+
+* Drop Django <1.8 support.
+* Get the test suite working, including on Travis.
+* Lots of code cleanup along the way.
+
 0.4.2
 =====
 
