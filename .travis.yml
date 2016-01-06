@@ -10,9 +10,8 @@ env:
   global:
     secure: "ohFDQycYOrveVlvEVwHwws2+xPOvFT2TmyoQk/2fILNpl6tiuI/91XdVv8dQ\n5ZsLXc63LP4CFYbCKkC6jCFrlWePB0aITF35bpGJqXk68JptTcsKF9L5LyHX\ntMqLKAgIBeMs/upSXx6LrKrdwmjmPx0rZL71j+mCN1IeNW/0Fpo="
 install:
-  - pip install -r requirements.txt --use-wheel
-  - pip install $DJANGO --use-wheel
-  - export DEBUG=True
+  - pip install $DJANGO
+  - pip install -r requirements.txt
 script: make test
 notifications:
   email: false
