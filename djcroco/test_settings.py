@@ -19,6 +19,7 @@ SECRET_KEY = 'lolz'
 INSTALLED_APPS = (
     'djcroco.tests',
     'djcroco',
+    'crocodoc',
 )
 
 ROOT_URLCONF = 'djcroco.tests.urls'

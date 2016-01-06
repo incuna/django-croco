@@ -4,9 +4,11 @@ python:
   - 2.7
 env:
   matrix:
-  - DJANGO_VERSION=1.3.7
-  - DJANGO_VERSION=1.4.5
-  - DJANGO_VERSION=1.5.1
+  - DJANGO_VERSION~=1.4
+  - DJANGO_VERSION~=1.5
+  - DJANGO_VERSION~=1.6
+  - DJANGO_VERSION~=1.7
+  - DJANGO_VERSION~=1.8
   global:
     secure: "ohFDQycYOrveVlvEVwHwws2+xPOvFT2TmyoQk/2fILNpl6tiuI/91XdVv8dQ\n5ZsLXc63LP4CFYbCKkC6jCFrlWePB0aITF35bpGJqXk68JptTcsKF9L5LyHX\ntMqLKAgIBeMs/upSXx6LrKrdwmjmPx0rZL71j+mCN1IeNW/0Fpo="
 install:
@@ -15,17 +17,6 @@ install:
 - pip install . --use-mirrors
 - export DEBUG=True
 script: make test
-#matrix:
-#  exclude:
-#    # Django doesn't support following combinations
-#    - python: 3.2
-#      env: DJANGO_VERSION=1.3.7
-#    - python: 3.2
-#      env: DJANGO_VERSION=1.4.5
-#    - python: 3.3
-#      env: DJANGO_VERSION=1.3.7
-#    - python: 3.3
-#      env: DJANGO_VERSION=1.4.5
 notifications:
   email: false
 branches:
