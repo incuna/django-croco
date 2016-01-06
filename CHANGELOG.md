@@ -1,6 +1,11 @@
 Changelog for djcroco
 =====================
 
+0.4.2
+=====
+
+* Check correctly for whether a file already exists, increasing performance.
+
 0.4.1
 =====
 

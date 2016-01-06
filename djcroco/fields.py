@@ -132,11 +132,6 @@ class CrocoField(models.Field):
                 'type': self._file_ext(value.name),
             }
             value = CrocoFieldObject(self, file_attrs)
-
-            # if self.thumbnail_field:
-            #     thumbnail = model_instance._meta.get_field(self.thumbnail_field)
-            #     filename = thumbnail.upload_to + croco_uuid
-            #     thumbnail.storage.delete(filename)
         return self.get_prep_value(value)
 
     def contribute_to_class(self, cls, name):
@@ -186,7 +181,7 @@ class CrocoField(models.Field):
     def _get_thumbnail(self, uuid):
         if self.thumbnail_field:
             thumbnail = self.model._meta.get_field(self.thumbnail_field)
-            filename = thumbnail.upload_to + uuid
+            filename = thumbnail.upload_to + uuid + '.png'
             # TODO: try to avoid using `exists` as it is expensive to check
             if thumbnail.storage.exists(filename):
                 return thumbnail.storage.url(filename)
