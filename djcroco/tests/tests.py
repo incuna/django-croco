@@ -2,9 +2,9 @@ import time
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
-from django.utils import unittest
 from django.template import Context, Template
 from django.test.client import Client
+from django.utils import unittest
 
 from .models import Example, NullableExample
 
@@ -34,7 +34,8 @@ def initial_setup():
     # Create sample data
     example = Example.objects.create(
         name='Test item',
-        document=SimpleUploadedFile(TEST_DOC_NAME, TEST_DOC_DATA))
+        document=SimpleUploadedFile(TEST_DOC_NAME, TEST_DOC_DATA),
+    )
 
     # Get data out of the model
     instance = Example.objects.get(id=example.id)
@@ -93,8 +94,10 @@ class CrocoTestCase(unittest.TestCase):
     def test_document_url(self):
         # Ensure correct URL was returned for `url`
         url = self.instance.document.url
-        expected_url = reverse('croco_document_url',
-            kwargs={'uuid': self.instance.document.uuid})
+        expected_url = reverse(
+            'croco_document_url',
+            kwargs={'uuid': self.instance.document.uuid},
+        )
         self.assertEqual(url, expected_url)
 
         # Ensure correct redirect was made
@@ -117,8 +120,10 @@ class CrocoTestCase(unittest.TestCase):
     def test_document_content_url(self):
         # Ensure correct URL for `content_url`
         content_url = self.instance.document.content_url
-        expected_url = reverse('croco_document_content_url',
-            kwargs={'uuid': self.instance.document.uuid})
+        expected_url = reverse(
+            'croco_document_content_url',
+            kwargs={'uuid': self.instance.document.uuid},
+        )
         self.assertEqual(content_url, expected_url)
 
         # Ensure correct response
@@ -135,24 +140,24 @@ class CrocoTestCase(unittest.TestCase):
     def test_document_download(self):
         # Ensure correct URL for `download_document`
         document_url = self.instance.document.download_document
-        expected_url = reverse('croco_document_download',
-            kwargs={'uuid': self.instance.document.uuid})
+        expected_url = reverse(
+            'croco_document_download',
+            kwargs={'uuid': self.instance.document.uuid},
+        )
         self.assertEqual(document_url, expected_url)
 
         # Ensure correct response
         response = client.get(document_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.content), 679)
-        self.assertEqual(response._headers['content-type'][1],
-            'application/pdf')
+        self.assertEqual(response._headers['content-type'][1], 'application/pdf')
 
     def test_document_download_with_annotations(self):
         tmpl = "{{ obj.document.download_document|annotated:'true' }}"
         response = client.get(self.render(tmpl))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.content), 1049)
-        self.assertEqual(response._headers['content-type'][1],
-            'application/pdf')
+        self.assertEqual(response._headers['content-type'][1], 'application/pdf')
 
     def test_document_thumbnail_custom_field(self):
         # get filename with correct path
@@ -168,8 +173,10 @@ class CrocoTestCase(unittest.TestCase):
     def test_thumbnail_download(self):
         # Ensure correct URL for `download_thumbnail`
         thumbnail_url = self.instance.document.download_thumbnail
-        expected_url = reverse('croco_thumbnail_download',
-            kwargs={'uuid': self.instance.document.uuid})
+        expected_url = reverse(
+            'croco_thumbnail_download',
+            kwargs={'uuid': self.instance.document.uuid},
+        )
         self.assertEqual(thumbnail_url, expected_url)
 
         # Ensure correct response
@@ -186,8 +193,10 @@ class CrocoTestCase(unittest.TestCase):
     def test_text_download(self):
         # Ensure correct URL for `download_text`
         text_url = self.instance.document.download_text
-        expected_url = reverse('croco_text_download',
-            kwargs={'uuid': self.instance.document.uuid})
+        expected_url = reverse(
+            'croco_text_download',
+            kwargs={'uuid': self.instance.document.uuid},
+        )
         self.assertEqual(text_url, expected_url)
 
         # Ensure text is not returned for test account (an account without

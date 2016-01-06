@@ -1,5 +1,5 @@
-import urlparse
 import urllib
+import urlparse
 
 from django import template
 
@@ -20,9 +20,16 @@ def add_query_params(url, params=None):
         return url
     encoded = urllib.urlencode(params)
     url = urlparse.urlparse(url)
-    return urlparse.urlunparse((url.scheme, url.netloc, url.path, url.params,
-        (encoded if not url.query else url.query + '&' + encoded),
-        url.fragment))
+
+    encoded_with_query = encoded if not url.query else url.query + '&' + encoded
+    return urlparse.urlunparse((
+        url.scheme,
+        url.netloc,
+        url.path,
+        url.params,
+        encoded_with_query,
+        url.fragment,
+    ))
 
 
 # TODO: dynamic creation of filters using python's closures?
