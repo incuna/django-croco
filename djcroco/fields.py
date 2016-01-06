@@ -4,7 +4,7 @@ import os
 
 import crocodoc
 from crocodoc import CrocodocError
-from django import forms, get_version
+from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files import File
@@ -14,12 +14,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
 from django.template.defaultfilters import filesizeformat
+from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
-
-if get_version()[:5] < '1.4.2':  # six was added in 1.4.2
-    string_types = basestring
-else:
-    from django.utils.six import string_types
 
 
 _token = 'CROCO_API_TOKEN'

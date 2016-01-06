@@ -17,6 +17,8 @@ class TestCrocoField(FakeCrocodocRequestMixin, unittest.TestCase):
             name='Test item',
             document=SimpleUploadedFile(TEST_DOC_NAME, TEST_DOC_DATA),
         )
+        # Reload the object from the database in order to ensure it's the correct type.
+        # Example.objects.create() returns a SimpleUploadedFile for some reason.
         cls.instance = Example.objects.get(id=example.id)
 
     def render(self, tmpl):
