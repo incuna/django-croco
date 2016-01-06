@@ -1,4 +1,5 @@
 SHELL := /bin/bash
+VERBOSITY := 1
 
 help:
 	@echo "Usage:"
@@ -9,6 +10,6 @@ release:
 	python setup.py register sdist upload
 
 test:
-	@coverage run test_project/manage.py test TODO_PACKAGE_NAME --verbosity=${VERBOSITY}
+	@coverage run test_project/manage.py test djcroco --verbosity=${VERBOSITY}
 	@flake8 .
 	@DJANGO_SETTINGS_MODULE=test_project.settings coverage report

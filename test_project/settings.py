@@ -13,6 +13,7 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = 'not-for-production'
 PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
+CROCO_API_TOKEN = 'fake'
 
 # DATABASES = {
 #     'default': dj_database_url.config(default='postgres://localhost/djcroco')
