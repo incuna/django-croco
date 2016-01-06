@@ -7,7 +7,7 @@ setup(
     name='django-croco',
     packages=find_packages(),
     include_package_data=True,
-    version=djcroco.__version__,
+    version='0.4.2',
     description='',
     long_description=open('README.rst').read(),
     author=djcroco.__author__,
