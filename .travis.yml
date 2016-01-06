@@ -1,9 +1,6 @@
 language: python
 sudo: false
 python: 2.7
-cache:
-  - directories:
-    - ~/.cache/pip
 env:
   matrix:
     - DJANGO='django~=1.8.0'
