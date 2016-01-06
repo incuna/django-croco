@@ -18,16 +18,18 @@ def add_query_params(url, params=None):
     """
     if not params:
         return url
+
     encoded = urllib.urlencode(params)
     url = urlparse.urlparse(url)
+    if url.query:
+        encoded = url.query + '&' + encoded
 
-    encoded_with_query = encoded if not url.query else url.query + '&' + encoded
     return urlparse.urlunparse((
         url.scheme,
         url.netloc,
         url.path,
         url.params,
-        encoded_with_query,
+        encoded,
         url.fragment,
     ))
 

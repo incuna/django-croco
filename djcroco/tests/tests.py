@@ -2,34 +2,22 @@ import mock
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.template import Context, Template
-from django.test.client import Client
 from django.utils import unittest
 
 from .models import Example, NullableExample
 from .utils import FakeCrocodocRequestMixin, TEST_DOC_DATA, TEST_DOC_NAME
 
 
-client = Client()
-
-
-def initial_setup():
-    """ Inits all here as we do not want doing it in *every* test """
-    # Create sample data
-    example = Example.objects.create(
-        name='Test item',
-        document=SimpleUploadedFile(TEST_DOC_NAME, TEST_DOC_DATA),
-    )
-
-    # Get data out of the model
-    instance = Example.objects.get(id=example.id)
-    return instance
-
-
 class TestCrocoField(FakeCrocodocRequestMixin, unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        """Create sample data and store it on the class."""
         super(TestCrocoField, cls).setUpClass()
-        cls.instance = initial_setup()
+        example = Example.objects.create(
+            name='Test item',
+            document=SimpleUploadedFile(TEST_DOC_NAME, TEST_DOC_DATA),
+        )
+        cls.instance = Example.objects.get(id=example.id)
 
     def render(self, tmpl):
         tmplout = "{% load croco_tags %}{% autoescape off %}"

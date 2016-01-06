@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         r'^croco_document/(?P<uuid>[-\w]+)$',
         views.CrocoDocumentView.as_view(redirect=True),
@@ -30,4 +29,4 @@ urlpatterns = patterns(
         views.CrocoTextDownload.as_view(),
         name='croco_text_download',
     ),
-)
+]
