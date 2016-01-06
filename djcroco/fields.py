@@ -2,7 +2,9 @@ import base64
 import json
 import os
 
-from django import forms, get_version
+import crocodoc
+from crocodoc import CrocodocError
+from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files import File
@@ -12,21 +14,17 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
 from django.template.defaultfilters import filesizeformat
+from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
 
-if get_version()[:5] < '1.4.2':  # six was added in 1.4.2
-    string_types = basestring
-else:
-    from django.utils.six import string_types
-
-import crocodoc
-from crocodoc import CrocodocError
 
 _token = 'CROCO_API_TOKEN'
 CROCO_API_TOKEN = getattr(settings, _token, os.environ.get(_token))
 if CROCO_API_TOKEN is None:
-    raise ImproperlyConfigured("CROCO_API_TOKEN settings is required."
-        " Define it in your project's settings.py or env.sh file.")
+    raise ImproperlyConfigured(
+        "CROCO_API_TOKEN settings is required."
+        " Define it in your project's settings.py or env.sh file."
+    )
 
 crocodoc.api_token = CROCO_API_TOKEN
 
@@ -141,7 +139,7 @@ class CrocoField(models.Field):
 
     def _check_thumbnail_field(self, instance, force=False, *args, **kwargs):
         obj = instance._meta
-        if not self.thumbnail_field in obj.get_all_field_names():
+        if self.thumbnail_field not in obj.get_all_field_names():
             msg = "No field '{0}' found on '{1}' class."
             raise AttributeError(msg.format(self.thumbnail_field, obj.object_name))
 
@@ -225,8 +223,7 @@ class CrocoField(models.Field):
         return os.path.splitext(filename)[1][1:]
 
     def _is_document(self, filename):
-        allowed_exts = ('pdf', 'ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx',
-            'csv')
+        allowed_exts = ('pdf', 'ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx', 'csv')
         _root, ext = os.path.splitext(filename.lower())
         if ext[1:] in allowed_exts:
             return True

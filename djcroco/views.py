@@ -35,8 +35,7 @@ class CrocoDocumentView(View):
 
             session = crocodoc.session.create(uuid, **params)
         except crocodoc.CrocodocError as e:
-            return HttpResponse(content=e.response_content,
-                status=e.status_code)
+            return HttpResponse(content=e.response_content, status=e.status_code)
 
         url = 'https://crocodoc.com/view/{0}'.format(session)
 
@@ -63,15 +62,18 @@ class CrocoDocumentDownload(View):
                 annotated = True
             if 'filter' in qs_params:
                 filter_by = True
-            file = crocodoc.download.document(uuid, pdf=pdf, annotated=annotated,
-                user_filter=filter_by)
+            crocodoc_file = crocodoc.download.document(
+                uuid,
+                pdf=pdf,
+                annotated=annotated,
+                user_filter=filter_by,
+            )
         except crocodoc.CrocodocError as e:
-            return HttpResponse(content=e.response_content,
-                status=e.status_code)
+            return HttpResponse(content=e.response_content, status=e.status_code)
 
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=%s.pdf' % uuid
-        response.write(file)
+        response.write(crocodoc_file)
         return response
 
 
@@ -85,11 +87,13 @@ class CrocoThumbnailDownload(View):
             width = height = 100
             if 'size' in request.GET:
                 width, height = request.GET['size'].split('x')
-            image = crocodoc.download.thumbnail(uuid, width=int(width),
-                height=int(height))
+            image = crocodoc.download.thumbnail(
+                uuid,
+                width=int(width),
+                height=int(height),
+            )
         except crocodoc.CrocodocError as e:
-            return HttpResponse(content=e.response_content,
-                status=e.status_code)
+            return HttpResponse(content=e.response_content, status=e.status_code)
 
         response = HttpResponse(content_type='image/png')
         response['Content-Disposition'] = 'attachment; filename=%s.png' % uuid
@@ -106,7 +110,6 @@ class CrocoTextDownload(View):
         try:
             text = crocodoc.download.text(uuid)
         except crocodoc.CrocodocError as e:
-            return HttpResponse(content=e.response_content,
-                status=e.status_code)
+            return HttpResponse(content=e.response_content, status=e.status_code)
 
         return HttpResponse(content=text)
