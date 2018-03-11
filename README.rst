@@ -9,10 +9,10 @@ djcroco
 .. image:: https://travis-ci.org/mattack108/djcroco.png?branch=master
    :target: https://travis-ci.org/mattack108/djcroco
 
-.. image:: https://pypip.in/v/djcroco/badge.png
+.. image:: https://img.shields.io/pypi/v/djcroco.svg
    :target: https://pypi.python.org/pypi/djcroco
 
-.. image:: https://pypip.in/d/djcroco/badge.png
+.. image:: https://img.shields.io/pypi/dm/djcroco.svg
    :target: https://pypi.python.org/pypi/djcroco
 
 ``djcroco`` is a custom `Django <https://www.djangoproject.com/>`_ model field to
