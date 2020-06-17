@@ -1,5 +1,4 @@
-import urllib
-import urlparse
+from urllib.parse import urlencode, urlparse, urlunparse
 
 from django import template
 
@@ -19,12 +18,12 @@ def add_query_params(url, params=None):
     if not params:
         return url
 
-    encoded = urllib.urlencode(params)
-    url = urlparse.urlparse(url)
+    encoded = urlencode(params)
+    url = urlparse(url)
     if url.query:
         encoded = url.query + '&' + encoded
 
-    return urlparse.urlunparse((
+    return urlunparse((
         url.scheme,
         url.netloc,
         url.path,

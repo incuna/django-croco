@@ -30,7 +30,7 @@ class TestCrocoField(FakeCrocodocRequestMixin, unittest.TestCase):
     def assertContains(self, test_value, expected_set):
         # That assert method does not exist in Py2.6
         msg = "%s does not contain %s" % (test_value, expected_set)
-        self.assert_(test_value not in expected_set, msg)
+        self.assertTrue(test_value not in expected_set, msg)
 
     def test_document_empty(self):
         # Ensure document can be empty
@@ -49,7 +49,7 @@ class TestCrocoField(FakeCrocodocRequestMixin, unittest.TestCase):
     def test_document_size(self):
         # Ensure correct size
         self.assertEqual(self.instance.document.size, 679)
-        self.assertEqual(self.instance.document.size_human, u'679\xa0bytes')
+        self.assertEqual(self.instance.document.size_human, '679\xa0bytes')
 
     def test_document_type(self):
         # Ensure correct file type

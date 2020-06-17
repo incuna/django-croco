@@ -95,8 +95,7 @@ class CrocoFieldObject(object):
         return "%s" % self.attrs['name']
 
 
-class CrocoField(models.Field):
-    __metaclass__ = models.SubfieldBase
+class CrocoField(models.Field, metaclass=models.SubfieldBase):
     description = _("CrocoField")
 
     def __init__(self, verbose_name=None, name=None, *args, **kwargs):
